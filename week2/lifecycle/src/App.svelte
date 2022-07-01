@@ -1,16 +1,13 @@
-<script lang="ts">
-  import Something from "./Something.svelte";
-  let toggle = false;
+<script>
+  import { delayRender, lifecycle } from "./lifecycle.js";
+  import Something2 from "./Something2.svelte";
+
+  let done = delayRender();
+  lifecycle();
 </script>
 
-<button
-  on:click={() => {
-    toggle = !toggle;
-  }}
->
-  Toggle
-</button>
-
-{#if toggle}
-  <Something />
+{#if $done}
+  <h1>Hello lifecycle!</h1>
 {/if}
+
+<Something2 />
