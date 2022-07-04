@@ -1,13 +1,14 @@
 <script>
-  import { delayRender, lifecycle } from "./lifecycle.js";
-  import Something2 from "./Something2.svelte";
+  import { tick } from "svelte";
 
-  let done = delayRender();
-  lifecycle();
+  let name = "world";
+
+  async function handler() {
+    name = "Yujin";
+    await tick();
+    const h1 = document.querySelector("h1");
+    console.log(h1.innerText);
+  }
 </script>
 
-{#if $done}
-  <h1>Hello lifecycle!</h1>
-{/if}
-
-<Something2 />
+<h1 on:click={handler}>Hello {name}!</h1>
