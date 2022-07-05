@@ -1,35 +1,24 @@
 <script>
-  let name = "Yujin";
-  let fruits = ["Apple", "Banana", "Cherry"];
-  let user = {
-    name: "Yujin",
-    depth: {
-      a: "b",
-    },
-    numbers: [1, 2],
-  };
+  // 일반 javascript
+  loop1: for (let i = 0; i < 3; i++) {
+    loop2: for (let j = 0; j < 3; j++) {
+      if (i === 2) {
+        break loop1;
+      }
+      console.log(`${i}-${j}`);
+    }
+    console.log("---------");
+  }
 
-  let numbers = user.numbers;
-  let hello = "world";
+  heropy: {
+    console.log("a");
+    break heropy;
+    console.log("b");
+  }
 
-  function assign() {
-    name = "Neo";
-    // fruits.push("Orange");
-    // fruits = fruits;
-    fruits = [...fruits, "Orange"];
-    user.name = "Neo";
-    user.depth.a = "c";
-    user.numbers.push(3);
-    numbers = numbers;
+  // svelte 반응성 구문
+  let count = 0;
+  $: {
+    console.log(count);
   }
 </script>
-
-<button on:click={assign}>Assign</button>
-
-<h2>name: {name}</h2>
-<h2>fruits: {fruits}</h2>
-<h2>user name: {user.name}</h2>
-<h2>user depth a: {user.depth.a}</h2>
-<h2>user numbers: {user.numbers}</h2>
-<h2>numbers: {numbers}</h2>
-<h2>hello: {hello}</h2>
