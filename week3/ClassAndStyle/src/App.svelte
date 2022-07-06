@@ -1,36 +1,21 @@
 <script>
-  let active = false;
-  let color = {
-    t: "tomato",
-    w: "#fff",
-  };
-  let letterSpacing = "letter-spacing: 5px;";
+  let active = true;
+  let valid = false;
+  let camelCase = true;
+
+  function multi() {
+    return "active multiple-class";
+  }
 </script>
 
-<button on:click={() => (active = !active)}> Toggle! </button>
+<div class={active ? "active" : ""}>3항 연산자 보간</div>
 
-<!-- <div class={active ? "active" : ""}>Hello</div> -->
-<div class:active>Hello</div>
+<div class:hello={active}>Class 지시어 (directive) 바인딩</div>
 
-<h2 style="background-color:{color.t}; color: {color.w}; {letterSpacing}">
-  Heropy!
-</h2>
+<div class:active>Class 지시어 바인딩 단축 형태</div>
 
-<style>
-  div {
-    width: 120px;
-    height: 200px;
-    background: royalblue;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 20px;
-    transition: 0.4s;
-  }
-  .active {
-    width: 250px;
-    background: tomato;
-  }
-</style>
+<div class:active class:valid class:camelCase class:camel-case={camelCase}>
+  다중(multiple) Class 지시어 바인딩
+</div>
+
+<div class={multi()}>함수 실행</div>
