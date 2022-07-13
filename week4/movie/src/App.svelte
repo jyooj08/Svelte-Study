@@ -1,43 +1,33 @@
 <script>
-  import axios from "axios";
+  // let promise = new Promise((resolve) => resolve("Hmm..."));
+  let promise = Promise.resolve("Hmm...");
+  let isError = false;
 
-  let apikey = "9d38c929";
-  let title = "";
-  let movies = null;
-  let error = null;
-  let loading = false;
-
-  async function searchMovies() {
-    if (loading) return;
-    movies = null;
-    error = null;
-    loading = true;
-    try {
-      const res = await axios.get(
-        `http://www.omdbapi.com/?apikey=${apikey}&s=${title}`
-      );
-      console.log(res);
-      movies = res.data.Search;
-    } catch (err) {
-      console.log(err.message);
-      error = err;
-    } finally {
-      loading = false;
-    }
+  function fetchName() {
+    return new Promise((resolve, reject) => {
+      if (isError) {
+        reject(new Error("Sorry..."));
+      }
+      setTimeout(() => {
+        resolve("Heropy");
+      }, 1000);
+    });
   }
 </script>
 
-<input bind:value={title} />
-<button on:click={searchMovies}>검색</button>
+<button
+  on:click={() => {
+    promise = fetchName();
+  }}>Fetch name!</button
+>
 
-{#if loading}
-  <p style="color: royalblue">Loading...</p>
-{:else if movies}
-  <ul>
-    {#each movies as movie}
-      <li>{movie.Title}</li>
-    {/each}
-  </ul>
-{:else if error}
-  <p style="color:red">{error.message}</p>
-{/if}
+{#await promise}
+  <!-- 대기(Pending) -->
+  <p>Loading...</p>
+{:then name}
+  <!-- 이행(Fulfilled) -->
+  <h1>{name}</h1>
+{:catch err}
+  <!-- 거부(Rejected) -->
+  <p>{err.message}</p>
+{/await}
