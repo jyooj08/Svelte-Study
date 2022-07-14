@@ -1,33 +1,41 @@
 <script>
-  // let promise = new Promise((resolve) => resolve("Hmm..."));
-  let promise = Promise.resolve("Hmm...");
-  let isError = false;
+  import axios from "axios";
 
-  function fetchName() {
-    return new Promise((resolve, reject) => {
-      if (isError) {
-        reject(new Error("Sorry..."));
+  let apikey = "9d38c929";
+  let title = "";
+  let promise = Promise.resolve([]);
+
+  function searchMovies() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(
+          `http://www.omdbapi.com/?apikey=${apikey}&s=${title}`
+        );
+        resolve(res.data.Search);
+      } catch (err) {
+        reject(err);
+      } finally {
+        console.log("Done!");
       }
-      setTimeout(() => {
-        resolve("Heropy");
-      }, 1000);
     });
   }
 </script>
 
+<input bind:value={title} />
 <button
   on:click={() => {
-    promise = fetchName();
-  }}>Fetch name!</button
+    promise = searchMovies();
+  }}>검색</button
 >
 
 {#await promise}
-  <!-- 대기(Pending) -->
-  <p>Loading...</p>
-{:then name}
-  <!-- 이행(Fulfilled) -->
-  <h1>{name}</h1>
-{:catch err}
-  <!-- 거부(Rejected) -->
-  <p>{err.message}</p>
+  <p style="color: royalblue">Loading...</p>
+{:then movies}
+  <ul>
+    {#each movies as movie}
+      <li>{movie.Title}</li>
+    {/each}
+  </ul>
+{:catch error}
+  <p style="color:red">{error.message}</p>
 {/await}
