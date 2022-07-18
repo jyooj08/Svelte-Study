@@ -1,9 +1,13 @@
 <script>
-  export let todos, todo, index;
+  import { createEventDispatcher } from "svelte";
+  export let todo;
+
+  const dispatch = createEventDispatcher();
 
   function deleteTodo() {
-    todos.splice(index, 1);
-    todos = todos;
+    dispatch("deleteMe", {
+        todoId: todo.id;
+    });
   }
 </script>
 
