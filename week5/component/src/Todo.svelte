@@ -6,7 +6,7 @@
 
   function deleteTodo() {
     dispatch("deleteMe", {
-        todoId: todo.id;
+      todoId: todo.id,
     });
   }
 </script>
