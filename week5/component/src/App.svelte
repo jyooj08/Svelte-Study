@@ -1,15 +1,15 @@
 <script>
-  import Fruit, { count } from "./Fruit.svelte";
+  import AudioPlayer, { stopAll } from "./AudioPlayer.svelte";
 
-  let fruits = ["Apple", "Banana", "Cherry", "Mango", "Orange"];
+  let audioTracks = [
+    "https://sveltejs.github.io/assets/music/strauss.mp3",
+    "https://sveltejs.github.io/assets/music/holst.mp3",
+    "https://sveltejs.github.io/assets/music/satie.mp3",
+  ];
 </script>
 
-<button
-  on:click={() => {
-    console.log(count);
-  }}>Total count log!</button
->
+<button on:click={stopAll}>Stop all!</button>
 
-{#each fruits as fruit}
-  <Fruit {fruit} />
+{#each audioTracks as src}
+  <AudioPlayer {src} />
 {/each}
