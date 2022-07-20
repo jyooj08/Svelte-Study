@@ -1,13 +1,15 @@
 <script>
-  import Parent from "./Parent.svelte";
+  import Fruit, { count } from "./Fruit.svelte";
 
-  function handler(e) {
-    console.log(e.currentTarget);
-  }
-
-  function myEventHandler(e) {
-    console.log(e.detail.myName);
-  }
+  let fruits = ["Apple", "Banana", "Cherry", "Mango", "Orange"];
 </script>
 
-<Parent on:click={handler} on:myEvent={myEventHandler} />
+<button
+  on:click={() => {
+    console.log(count);
+  }}>Total count log!</button
+>
+
+{#each fruits as fruit}
+  <Fruit {fruit} />
+{/each}
