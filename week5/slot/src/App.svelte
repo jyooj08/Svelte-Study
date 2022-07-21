@@ -1,19 +1,59 @@
 <script>
-  import Card from "./Card.svelte";
+  import Wrap from "./Wrap.svelte";
+
+  let fruits = {
+    apple: {
+      value: "",
+      options: {
+        readonly: false,
+        disabled: false,
+        placeholder: "AA",
+      },
+    },
+    banana: {
+      value: "BANANA",
+      options: {
+        disabled: false,
+        placehoder: "AA",
+      },
+    },
+  };
+
+  function add(name) {
+    console.log(name);
+  }
 </script>
 
-<Card>
-  <div slot="age">85</div>
-  <h2 slot="name">Heropy</h2>
-  <div slot="email">aaa@gmail.com</div>
-</Card>
-<Card>
-  <span slot="email">neo@bac.com</span>
-  <h3 slot="name">Neo</h3>
-</Card>
+<label class="fruits__apple" name="apple">
+  <input
+    bind:value={fruits.apple.value}
+    readonly={fruits.apple.options.readonly}
+    disabled={fruits.apple.options.disabled}
+    placeholder={fruits.apple.options.placeholder}
+    on:change={() => add("apple")}
+  />
+</label>
 
-<style>
-  h3 {
-    color: red;
-  }
-</style>
+<Wrap scopeName="apple" let:_name>
+  <label class="fruits__{_name}" name={_name}>
+    <input
+      bind:value={fruits[_name].value}
+      readonly={fruits[_name].options.readonly}
+      disabled={fruits[_name].options.disabled}
+      placeholder={fruits[_name].options.placeholder}
+      on:change={() => add({ _name })}
+    />
+  </label>
+</Wrap>
+
+<Wrap scopeName="banana" let:_name>
+  <label class="fruits__{_name}" name={_name}>
+    <input
+      bind:value={fruits[_name].value}
+      readonly={fruits[_name].options.readonly}
+      disabled={fruits[_name].options.disabled}
+      placeholder={fruits[_name].options.placeholder}
+      on:change={() => add({ _name })}
+    />
+  </label>
+</Wrap>
