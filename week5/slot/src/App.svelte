@@ -1,9 +1,18 @@
 <script>
-  import Parent from "./Parent.svelte";
+  import UserCard from "./UserCard.svelte";
 </script>
 
-<Parent let:scoped>
-  <h2>Default slot..</h2>
-  <h3 slot="named">Named slot..</h3>
-  <h1 slot="scoped">Scoped slot.. {scoped}</h1>
-</Parent>
+<UserCard>
+  <h2 slot="name">HEROPY</h2>
+  <div slot="age">85</div>
+  <div slot="email">aaa@gmail.com</div>
+</UserCard>
+
+<UserCard>
+  <h2 slot="name">Neo</h2>
+  <div slot="email">neo@gmail.com</div>
+</UserCard>
+
+<UserCard>
+  <h2 slot="name">Evan</h2>
+</UserCard>
