@@ -1,15 +1,11 @@
 <script>
-  import WritableMethods from "./WritableMethods.svelte";
+  import Readable from "./Readable.svelte";
 
   let toggle = true;
 </script>
 
-<button
-  on:click={() => {
-    toggle = !toggle;
-  }}>Toggle</button
->
+<button on:click={() => (toggle = !toggle)}>Toggle</button>
 
 {#if toggle}
-  <WritableMethods />
+  <Readable />
 {/if}
