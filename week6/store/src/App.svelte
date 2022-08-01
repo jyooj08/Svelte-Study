@@ -1,11 +1,8 @@
 <script>
-  import Derived from "./Derived.svelte";
+  import { count, double, user } from "./store4";
+  import { get } from "svelte/store";
 
-  let toggle = true;
+  console.log(get(count));
+  console.log(get(double));
+  console.log(get(user));
 </script>
-
-<button on:click={() => (toggle = !toggle)}>Toggle</button>
-
-{#if toggle}
-  <Derived />
-{/if}
