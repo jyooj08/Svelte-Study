@@ -1,19 +1,33 @@
 <script>
-  import Address from "./Address.svelte";
+  import Heropy from "./Heropy.svelte";
+  import Neo from "./Neo.svelte";
 
-  let address = {
-    label: "대한민국",
-    children: [
-      {
-        label: "경기도",
-        children: [{ label: "수원" }, { label: "성남" }],
-      },
-      {
-        label: "강원도",
-        children: [{ label: "강릉" }, { lable: "속초" }],
-      },
-    ],
-  };
+  let components = [
+    { name: "Heropy", comp: Heropy },
+    { name: "Neo", comp: Neo },
+  ];
+  let selected = components[0].comp;
+  let index = 1;
 </script>
 
-<Address {address} />
+{#each components as { name, comp }, i (name)}
+  <label>
+    <input
+      type="radio"
+      value={comp}
+      bind:group={selected}
+      on:change={() => {
+        index = i + 1;
+      }}
+    />
+    {name}
+  </label>
+{/each}
+
+<svelte:component this={selected} {index} />
+
+<!-- {#if selected === "Heropy"}
+  <Heropy />
+{:else if selected === "Neo"}
+  <Neo />
+{/if} -->
