@@ -1,5 +1,5 @@
 <script>
-  import Derived from "./Derived.svelte";
+  import Readable from "./Readable.svelte";
 
   let toggle = true;
 </script>
@@ -7,5 +7,5 @@
 <button on:click={() => (toggle = !toggle)}>Toggle</button>
 
 {#if toggle}
-  <Derived />
+  <Readable />
 {/if}
