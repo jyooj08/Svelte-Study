@@ -1,33 +1,41 @@
 <script>
-  import Heropy from "./Heropy.svelte";
-  import Neo from "./Neo.svelte";
+  let key = "";
+  let innerWidth;
+  let innerHeight;
+  let outerWidth;
+  let outerHeight;
+  let online;
+  let scrollX;
+  let scrollY;
 
-  let components = [
-    { name: "Heropy", comp: Heropy },
-    { name: "Neo", comp: Neo },
-  ];
-  let selected = components[0].comp;
-  let index = 1;
+  // window.addEventListener("keydown", (event) => {
+  //   key = event.key;
+  // });
 </script>
 
-{#each components as { name, comp }, i (name)}
-  <label>
-    <input
-      type="radio"
-      value={comp}
-      bind:group={selected}
-      on:change={() => {
-        index = i + 1;
-      }}
-    />
-    {name}
-  </label>
-{/each}
+<svelte:window
+  on:keydown={(e) => (key = e.key)}
+  bind:innerWidth
+  bind:innerHeight
+  bind:outerWidth
+  bind:outerHeight
+  bind:online
+  bind:scrollX
+  bind:scrollY
+/>
 
-<svelte:component this={selected} {index} />
+<h1>{key}</h1>
+<div>innerWidth: {innerWidth}</div>
+<div>innerHeight: {innerHeight}</div>
+<div>outerWidth: {outerWidth}</div>
+<div>outerHeight: {outerHeight}</div>
+<div>online: {online}</div>
+<input type="number" bind:value={scrollX} />
+<input type="number" bind:value={scrollY} />
+<div class="for-scroll" />
 
-<!-- {#if selected === "Heropy"}
-  <Heropy />
-{:else if selected === "Neo"}
-  <Neo />
-{/if} -->
+<style>
+  .for-scroll {
+    height: 2000px;
+  }
+</style>
