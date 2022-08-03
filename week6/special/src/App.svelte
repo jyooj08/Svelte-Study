@@ -1,11 +1,22 @@
 <script>
-  import Heropy from "./Heropy.svelte";
+  import Fruit from "./Fruit.svelte";
 
-  let toggle = false;
+  let fruits = [
+    { id: 1, name: "Apple" },
+    { id: 2, name: "Banana" },
+    { id: 3, name: "Cherry" },
+    { id: 5, name: "Mango" },
+    { id: 4, name: "Orange" },
+  ];
 </script>
 
-<button on:click={() => (toggle = !toggle)}>Toggle!</button>
+<button
+  on:click={() => {
+    fruits[0] = { id: 1, name: "Apple" };
+    fruits = fruits;
+  }}>Update</button
+>
 
-{#if toggle}
-  <Heropy />
-{/if}
+{#each fruits as fruit (fruit.id)}
+  <Fruit {fruit} />
+{/each}
