@@ -1,5 +1,11 @@
+<svelte:options accessors />
+
 <script>
-  export let index;
+  let age = 22;
+  export let name = "Neo";
+  export function getAge() {
+    console.log(age);
+  }
 </script>
 
-<h2>{index}. Neo</h2>
+<h1 on:click={getAge}>{name}!</h1>

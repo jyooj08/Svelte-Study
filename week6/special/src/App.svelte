@@ -1,22 +1,13 @@
 <script>
-  import Fruit from "./Fruit.svelte";
+  import Neo from "./Neo.svelte";
 
-  let fruits = [
-    { id: 1, name: "Apple" },
-    { id: 2, name: "Banana" },
-    { id: 3, name: "Cherry" },
-    { id: 5, name: "Mango" },
-    { id: 4, name: "Orange" },
-  ];
+  let neo;
+  function handler() {
+    console.log(neo);
+    console.log(neo.name);
+    console.log(neo.getAge());
+  }
 </script>
 
-<button
-  on:click={() => {
-    fruits[0] = { id: 1, name: "Apple" };
-    fruits = fruits;
-  }}>Update</button
->
-
-{#each fruits as fruit (fruit.id)}
-  <Fruit {fruit} />
-{/each}
+<button on:click={handler}>Toggle</button>
+<Neo bind:this={neo} />
